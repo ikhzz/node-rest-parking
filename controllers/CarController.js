@@ -1,5 +1,6 @@
 const CarList = require("../models/CarList");
 const ParkList = require("../models/ParkList");
+const History = require('../models/History')
 
 class CarController {
   // car controller property
@@ -10,6 +11,7 @@ class CarController {
   constructor(){
     this.#carlist = new CarList();
     this.#parklist = new ParkList(10);
+    this.#history = new History();
   }
   // register car in method
   carIn = (req, res) => {
@@ -58,6 +60,7 @@ class CarController {
       console.log('insde', pay)
     }
     // delete car from list car
+    this.#history.setHistory = {...carOut, jumlahBayar: pay}
     this.#carlist.deleteCar(req.body.platnomor)
     // set parking slot to free
     this.#parklist.carOut = carOut.parkAt
@@ -69,23 +72,29 @@ class CarController {
       jumlahBayar : pay
     })
   }
-  // experiment method
+  getCar = (req, res) => {
+    let get = {'All car': this.#carlist.getAll}
+    if(req.query.type){
+      get = {"Jumlah Kendaraan" : this.#carlist.getType(req.query.type)}
+    }
+    if(req.query.color){
+      get = {platNomor: this.#carlist.getColor(req.query.color)}
+    }
+    return res.status(200).json({
+      message: "Success",
+      ...get
+    })
+  }
+  // read all method
   readCarList = (req, res) => {
-    const date = new Date()
-    console.log(date);
-    const a = this.#carlist.readAll
+    const a = this.#carlist.getAll
     const b = this.#parklist.allList
-    const date1 = new Date("2021-06-25T06:29:02.365Z")
-    const date2 = new Date("2021-06-24T06:24:36.288Z")
-    const result = date1.getTime() - date2.getTime()
-    const result2 = result/ 60/ 1000
-    console.log(result);
-    console.log(result2);
-    console.log(result2/60);
+    const c = this.#history.getHistory
     return res.status(200).json({
       message: "Success",
       car : a,
-      park: b
+      park: b,
+      history: c
     })
   }
 }

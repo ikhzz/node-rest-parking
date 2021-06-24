@@ -36,7 +36,7 @@ class ParkList {
       }
     }
   }
-  // i forget what this getter for
+  // get park list
   get allList(){
     return this.#slot
   }

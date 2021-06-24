@@ -27,8 +27,24 @@ class CarList {
     this.#list.push(car)
   }
   // getter helper to read data
-  get readAll(){
+  get getAll(){
     return this.#list
+  }
+  // get all plat nomor by color
+  getColor = (color) => {
+    const result = []
+    for(let i of this.#list){
+      if(i.warna == color) result.push(i.platNomor)
+    }
+    return result
+  }
+  // get number of car by type
+  getType = (type) => {
+    let num = 0
+    for(let i of this.#list){
+      if(i.type == type) num++
+    }
+    return num
   }
   // method to get car that is out of park
   carOut = (platNomor) => {
