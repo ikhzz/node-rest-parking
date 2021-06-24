@@ -28,6 +28,14 @@ class ParkList {
     }
     return false
   }
+  set parkSlot(slot){
+    for (let i = 0; i < this.#slot.length; i++) {
+      if(this.#slot[i].slotName == slot){
+        this.#slot[i].isOccupied = true;
+        return
+      }
+    }
+  }
   // free car parking slot
   set carOut(slot) {
     for(let i = 0; i < this.#slot.length; i++){

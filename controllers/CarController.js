@@ -35,6 +35,8 @@ class CarController {
       type: req.body.type,
       dateOut: null,
     }
+    // set park slot occupied to true
+    this.#parklist.parkSlot = free
     return res.status(200).json({
       message: "Success",
       response
