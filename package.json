@@ -1,0 +1,16 @@
+{
+  "name": "parking-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --testTimeout=100000 --coverage --forceExit",
+    "dev": "NODE_ENV=development nodemon index.js"
+  },
+  "author": "ikhz",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  }
+}
